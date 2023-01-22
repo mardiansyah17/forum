@@ -1,6 +1,6 @@
 {
   "name": "forum",
-  "homepage": "https://forum.ti-bidar.com/",
+
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -20,6 +20,8 @@
     "@mui/material": "^5.11.4",
     "axios": "^1.2.2",
     "daisyui": "^2.46.1",
+    "js-cookie": "^3.0.1",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

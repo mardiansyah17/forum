@@ -2,6 +2,7 @@ import {
   faBullhorn,
   faHashtag,
   faHome,
+  faPlus,
   faQuestion,
   faTag,
   faUser,
@@ -29,6 +30,12 @@ export default function SideBar() {
             title="Tags"
             icon={faHashtag}
             active={location.pathname === "/tags" ? true : false}
+          />
+          <SideBarItem
+            path={"/create-forum"}
+            title="Buat forum"
+            icon={faPlus}
+            active={location.pathname === "/create-forum" ? true : false}
           />
           <SideBarItem
             path={"/my-topics"}

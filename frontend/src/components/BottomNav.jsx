@@ -2,7 +2,14 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import BottomNavItemLink from "./BottomNavItemLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fa3, faBullhorn, faHashtag, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  fa3,
+  faBullhorn,
+  faHashtag,
+  faHome,
+  faPlus,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function BottomNav() {
   const location = useLocation();
@@ -19,6 +26,12 @@ export default function BottomNav() {
         icon={faHashtag}
         path={"/tags"}
         active={location.pathname === "/tags" ? true : false}
+      />
+      <BottomNavItemLink
+        title={"Buat forum"}
+        icon={faPlus}
+        path={"/create-forum"}
+        active={location.pathname === "/create-forum" ? true : false}
       />
       <BottomNavItemLink
         title={"My topic"}

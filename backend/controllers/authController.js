@@ -35,12 +35,24 @@ exports.register = async (req, res, next) => {
 
 exports.loginController = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const { email, password } = req.body;
     const user = await model.User.findOne({ where: { email } });
 
     if (!user) return res.status(400).json({ message: "Email atau password salah" });
 
-    const token = jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: "3h" });
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: "3h" }
+    );
     res.send(token);
   } catch (error) {
     res.json(error.message);

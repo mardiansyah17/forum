@@ -7,9 +7,9 @@ import Register from "./pages/Register";
 import MyTopics from "./pages/MyTopics";
 import Profil from "./pages/Profil";
 import ShowForum from "./pages/ShowForum";
-
+import NotFound from "./pages/NotFound";
+import CreateForum from "./pages/CreateForum";
 export default function App() {
-  const location = useLocation();
   useEffect(() => {
     let darkVal = localStorage.getItem("is_dark");
     //  if(darkVal==="")
@@ -18,14 +18,16 @@ export default function App() {
   }, []);
 
   return (
-    <Routes location={location.pathname}>
+    <Routes>
+      <Route path="*" element={<NotFound />} />
       <Route path="/" element={<Home />} />
       <Route path="/tags" element={<Tags />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/my-topics" element={<MyTopics />} />
       <Route path="/profil" element={<Profil />} />
-      <Route path="/:id" element={<ShowForum />} />
+      <Route path="/create-forum" element={<CreateForum />} />
+      {/* <Route path="/:id" element={<ShowForum />} /> */}
     </Routes>
   );
 }

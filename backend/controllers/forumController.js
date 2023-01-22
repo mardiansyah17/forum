@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 exports.forumCreate = async (req, res) => {
   try {
     const token = req.header("token");
-    const user = jwt.verify(token, process.env.SECRET_KEY).user;
+    const user = jwt.verify(token, process.env.SECRET_KEY);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

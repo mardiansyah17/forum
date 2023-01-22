@@ -5,8 +5,14 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyTopics from "./pages/MyTopics";
 import Profil from "./pages/Profil";
+import CreateForum from "./pages/CreateForum";
+import NotFound from "./pages/NotFound";
 
 export const router = createBrowserRouter([
+  {
+    path: "*",
+    element: <NotFound />,
+  },
   {
     path: "/",
     element: <Home />,
@@ -32,7 +38,11 @@ export const router = createBrowserRouter([
     element: <Profil />,
   },
   {
-    path: "/forum/:id",
-    element: <Profil />,
+    path: "/create-forum",
+    element: <CreateForum />,
   },
+  // {
+  //   path: "/forum/:id",
+  //   element: <Profil />,
+  // },
 ]);

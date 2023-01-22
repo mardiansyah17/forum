@@ -22,7 +22,7 @@ export default function Register() {
   }
 
   return (
-    <div className="flex flex-col px-10 items-center justify-center h-screen ">
+    <div className="flex flex-col dark:text-slate-300  px-10  lg:px-[30rem] items-center justify-center h-screen dark:bg-[#161820]">
       <FormInput
         changeHandler={(event) => {
           setForm((data) => ({ ...data, [inputHandler(event).name]: inputHandler(event).value }));
