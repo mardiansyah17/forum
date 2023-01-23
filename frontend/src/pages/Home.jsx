@@ -36,6 +36,7 @@ export default function Home() {
                 return (
                   <CardForum
                     key={`forumId.${idx}`}
+                    id={data.id}
                     title={data.title}
                     question={data.question}
                     updatedAt={data.updatedAt}

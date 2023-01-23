@@ -27,7 +27,7 @@ export default function App() {
       <Route path="/my-topics" element={<MyTopics />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/create-forum" element={<CreateForum />} />
-      {/* <Route path="/:id" element={<ShowForum />} /> */}
+      <Route path="/forum/:id" element={<ShowForum />} />
     </Routes>
   );
 }

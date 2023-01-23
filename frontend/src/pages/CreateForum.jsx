@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 import { redirect, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";

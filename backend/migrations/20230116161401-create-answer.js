@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
         references: { model: "users", key: "id" },
       },
-      forum_id: {
+      forumId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "forums", key: "id" },

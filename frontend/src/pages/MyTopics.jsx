@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Search from "../components/Search";
 import CardForum from "../components/CardForum";
-import getForums from "../utils/getForums";
+import Get from "../utils/Get";
+import Cookies from "js-cookie";
 
 export default function MyTopics() {
   const [forums, setForums] = useState([]);
+  const token = Cookies.get("token");
   useEffect(() => {
-    getForums().then((res) => setForums(res));
+    Get("forums/my-forums", token).then((res) => setForums(res.data));
   }, []);
   return (
     <Layout>

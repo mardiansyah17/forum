@@ -58,10 +58,25 @@ exports.forumDelete = async (req, res) => {
 exports.getOneForum = async (req, res) => {
   try {
     const forum = await model.forum.findByPk(req.params.id, {
-      include: [model.User],
+      include: [model.User, model.Answer],
     });
     res.json(forum);
   } catch (error) {
     res.json(error);
+  }
+};
+
+exports.getMyForums = async (req, res) => {
+  try {
+    const token = req.header("token");
+    const userId = jwt.decode(token).id;
+    const forums = await model.forum.findAll({
+      where: {
+        userId,
+      },
+    });
+    return res.json(forums);
+  } catch (error) {
+    return res.send(error);
   }
 };

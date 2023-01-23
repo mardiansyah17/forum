@@ -8,9 +8,12 @@ const {
   forumUpdate,
   forumDelete,
   getOneForum,
+  getMyForums,
 } = require("../controllers/forumController");
 const { forumValidate } = require("../validation/validation");
 const auth = require("../middleware/auth");
+
+router.get("/my-forums", auth, getMyForums);
 
 // create forum
 router.post("/", auth, forumValidate, forumCreate);

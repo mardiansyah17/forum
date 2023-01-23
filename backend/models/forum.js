@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   forum.associate = (model) => {
     forum.belongsTo(model.User);
+    forum.hasMany(model.Answer);
   };
   return forum;
 };
