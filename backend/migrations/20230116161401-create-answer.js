@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },
@@ -22,6 +22,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "forums", key: "id" },
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,

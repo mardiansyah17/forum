@@ -17,7 +17,7 @@ export default function Login() {
 
   function submitHandler() {
     axios.post("http://localhost:3000/api/auth/login", form).then((res) => {
-      Cookies.set("token", res.data);
+      Cookies.set("token", res.data, { expires: 0.125 });
 
       return navigate("/");
     });

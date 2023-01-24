@@ -37,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     f.dataValues.updatedAt = moment().toISOString();
   });
   forum.associate = (model) => {
-    forum.belongsTo(model.User);
-    forum.hasMany(model.Answer);
+    forum.belongsTo(model.User, { as: "user" });
+    forum.hasMany(model.Answer, { as: "answers", onDelete: "CASCADE", foreignKey: "forumId" });
   };
   return forum;
 };

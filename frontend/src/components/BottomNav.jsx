@@ -21,12 +21,12 @@ export default function BottomNav() {
         path={"/"}
         active={location.pathname === "/" ? true : false}
       />
-      <BottomNavItemLink
+      {/* <BottomNavItemLink
         title={"Tags"}
         icon={faHashtag}
         path={"/tags"}
         active={location.pathname === "/tags" ? true : false}
-      />
+      /> */}
       <BottomNavItemLink
         title={"Buat forum"}
         icon={faPlus}

@@ -23,6 +23,7 @@ export default function MyTopics() {
                   title={data.title}
                   question={data.question}
                   updatedAt={data.updatedAt}
+                  id={data.id}
                 />
               );
             })

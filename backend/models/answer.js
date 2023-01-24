@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Answer.init(
     {
       answer: DataTypes.STRING,
-      user_id: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
       forumId: DataTypes.INTEGER,
     },
     {
@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "answers",
     }
   );
-
+  Answer.associate = (model) => {
+    Answer.belongsTo(model.forum, { onDelete: "CASCADE" });
+    Answer.belongsTo(model.User, { as: "user" });
+  };
   return Answer;
 };

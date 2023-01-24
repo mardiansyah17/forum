@@ -23,12 +23,11 @@ export default function Profil() {
     } else {
       darkVal === "true" ? setIsDark(true) : setIsDark(false);
     }
-    console.log(token);
   }, [token]);
 
   function submitHandler() {
     axios.post("http://localhost:3000/api/auth/login", form).then((res) => {
-      Cookies.set("token", res.data);
+      Cookies.set("token", res.data, { expires: 0.125 });
       setToken(res.data);
     });
   }

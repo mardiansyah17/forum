@@ -20,8 +20,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
-      <Route path="/" element={<Home />} />
       <Route path="/tags" element={<Tags />} />
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/my-topics" element={<MyTopics />} />
