@@ -4,6 +4,7 @@ import Search from "../components/Search";
 import CardForum from "../components/CardForum";
 import Get from "../utils/Get";
 import Cookies from "js-cookie";
+import getForums from "../utils/getForums";
 
 export default function MyTopics() {
   const [forums, setForums] = useState([]);
@@ -18,22 +19,26 @@ export default function MyTopics() {
     });
     setForums(resForum);
   }
+  function searchHanler(event) {
+    try {
+      let val = event.target.value;
+      getForums().then((res) => {
+        let resForums = res.filter((data) => {
+          return data.title.toLowerCase().includes(val.toLowerCase());
+        });
+        setForums(resForums);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Layout>
-      <Search placeholder={"Cari forum"} />
+      <Search onChange={searchHanler} placeholder={"Cari forum"} />
       <div className="mt-5 overflow-y-auto  h-[72vh] sm:h-[82vh] lg:h-[72vh] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-blue-300 px-2">
         {forums.length != 0
           ? forums.map((data, idx) => {
-              return (
-                <CardForum
-                  updateForum={updateForum}
-                  key={`forumId.${idx}`}
-                  title={data.title}
-                  question={data.question}
-                  updatedAt={data.updatedAt}
-                  id={data.id}
-                />
-              );
+              return <CardForum updateForum={updateForum} key={`forumId.${idx}`} data={data} />;
             })
           : ""}
       </div>

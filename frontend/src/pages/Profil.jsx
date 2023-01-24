@@ -31,7 +31,6 @@ export default function Profil() {
       setToken(res.data);
     });
   }
-
   if (!token) {
     return (
       <Layout>

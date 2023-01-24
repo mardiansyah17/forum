@@ -1,8 +1,19 @@
 import { faComment, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
 import React from "react";
+import { useState } from "react";
+import Post from "../utils/Post";
 
-export default function ModalCreateAnswer() {
+export default function ModalCreateAnswer({ forumId, addAnswer }) {
+  const [answer, setAnswer] = useState("");
+
+  function submitHandler() {
+    Post(`answers`, { answer, forumId }, Cookies.get("token")).then((res) => {
+      addAnswer(res.data);
+    });
+  }
+
   return (
     <>
       <label
@@ -20,7 +31,8 @@ export default function ModalCreateAnswer() {
           <textarea
             name={"question"}
             className="border-2 mt-3 w-full bg-transparent border-indigo-500 px-3 py-2 rounded-lg outline-none "
-            id=""
+            value={answer}
+            onChange={(event) => setAnswer(event.target.value)}
             rows="5"
             placeholder="isi jawaban"
           ></textarea>
@@ -28,8 +40,12 @@ export default function ModalCreateAnswer() {
             <label htmlFor="create-answer" className="px-3 py-2 bg-red-500 rounded-lg">
               Batal
             </label>
-            <label htmlFor="create-answer" className="px-3 py-2 bg-indigo-600 rounded-lg">
-              Batal
+            <label
+              onClick={submitHandler}
+              htmlFor="create-answer"
+              className="px-3 py-2 bg-indigo-600 rounded-lg"
+            >
+              Kirim
             </label>
           </div>
         </div>

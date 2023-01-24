@@ -18,7 +18,7 @@ function ModalItem({ text, url }) {
   );
 }
 
-export default function ModalOptionCardForum({ show, id, updateForum }) {
+export default function ModalOptionCardForum({ closeOption, id, updateForum }) {
   return (
     <ul
       id="modal-option"
@@ -30,6 +30,7 @@ export default function ModalOptionCardForum({ show, id, updateForum }) {
             axios.delete(`${import.meta.env.VITE_API_URL}forums/${id}`).then((res) => {
               if (res.status == 200) {
                 updateForum(id);
+                closeOption();
               }
             });
           }

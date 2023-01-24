@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import { useState } from "react";
 import { inputHandler } from "../utils/inputHanlderForm";
 import axios from "axios";
+import Post from "../utils/Post";
 export default function CreateForum() {
   const [form, setForm] = useState({
     title: "",
@@ -20,14 +21,7 @@ export default function CreateForum() {
     }
   }, []);
   const submitHandler = () => {
-    axios
-      .post(`${import.meta.env.VITE_API_URL}forums`, form, {
-        headers: {
-          token: token,
-        },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    Post("forums", form, token).then((res) => navigate(`/forum/${res.data.id}`));
   };
 
   return (

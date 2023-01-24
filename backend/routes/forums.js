@@ -19,13 +19,12 @@ router.get("/my-forums", auth, getMyForums);
 router.post("/", auth, forumValidate, forumCreate);
 // get forum
 router.get("/", forumGet);
-// update forum
 
 // get one forum
 router.get("/:id", getOneForum);
 
-router.put("/:id", forumValidate, forumUpdate);
+router.put("/:id", auth, forumValidate, forumUpdate);
 // delete forum
-router.delete("/:id", forumDelete);
+router.delete("/:id", auth, forumDelete);
 
 module.exports = router;
