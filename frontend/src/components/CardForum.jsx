@@ -7,7 +7,7 @@ import ModalOptionCardForum from "./ModalOptionCardForum";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 moment.locale("id");
 
-export default function CardForum({ title, question, updatedAt, id }) {
+export default function CardForum({ title, question, updatedAt, id, updateForum }) {
   const [showModal, setShowModal] = useState(false);
   if (showModal) {
     document.documentElement.addEventListener("click", function (event) {
@@ -20,7 +20,11 @@ export default function CardForum({ title, question, updatedAt, id }) {
   }
   return (
     <div className="relative">
-      {showModal ? <ModalOptionCardForum show={showModal} id={id} /> : <></>}
+      {showModal ? (
+        <ModalOptionCardForum updateForum={updateForum} show={showModal} id={id} />
+      ) : (
+        <></>
+      )}
       <Link to={`/forum/${id}`}>
         <div className="p-3 border mb-4 bg-white dark:bg-[#23252E] border-gray-200 dark:border-gray-700 dark:shadow-slate-900  shadow-lg mx-3 rounded-lg">
           <div className="border-b border-gray-300 pb-3 mb-3">

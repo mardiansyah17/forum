@@ -11,6 +11,13 @@ export default function MyTopics() {
   useEffect(() => {
     Get("forums/my-forums", token).then((res) => setForums(res.data));
   }, []);
+
+  function updateForum(id) {
+    const resForum = forums.filter((data) => {
+      return data.id != id;
+    });
+    setForums(resForum);
+  }
   return (
     <Layout>
       <Search placeholder={"Cari forum"} />
@@ -19,6 +26,7 @@ export default function MyTopics() {
           ? forums.map((data, idx) => {
               return (
                 <CardForum
+                  updateForum={updateForum}
                   key={`forumId.${idx}`}
                   title={data.title}
                   question={data.question}

@@ -9,6 +9,7 @@ import Profil from "./pages/Profil";
 import ShowForum from "./pages/ShowForum";
 import NotFound from "./pages/NotFound";
 import CreateForum from "./pages/CreateForum";
+import EditForum from "./pages/EditForum";
 export default function App() {
   useEffect(() => {
     let darkVal = localStorage.getItem("is_dark");
@@ -27,6 +28,7 @@ export default function App() {
       <Route path="/my-topics" element={<MyTopics />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/create-forum" element={<CreateForum />} />
+      <Route path="/edit-forum/:id" element={<EditForum />} />
       <Route path="/forum/:id" element={<ShowForum />} />
     </Routes>
   );

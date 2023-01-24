@@ -1,33 +1,29 @@
 import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import Cookies from "js-cookie";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 import { useState } from "react";
 import { inputHandler } from "../utils/inputHanlderForm";
 import axios from "axios";
-export default function CreateForum() {
+import Get from "../utils/Get";
+import Update from "../utils/Update";
+export default function EditForum() {
   const [form, setForm] = useState({
     title: "",
     question: "",
   });
   const token = Cookies.get("token");
   const navigate = useNavigate();
+  const { id } = useParams();
   useEffect(() => {
-    if (!token) {
-      return navigate("/login", { replace: true });
-    }
+    Get(`forums/${id}`, token).then((res) =>
+      setForm({ title: res.data.title, question: res.data.question })
+    );
   }, []);
   const submitHandler = () => {
-    axios
-      .post(`${import.meta.env.VITE_API_URL}forums`, form, {
-        headers: {
-          token: token,
-        },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    Update(`forums/${id}`, form, token).then((res) => navigate(`/forum/${id}`));
   };
 
   return (

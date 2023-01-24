@@ -30,7 +30,7 @@ export default function ShowForum() {
   return (
     <div className="bg-[#FCFBFD] sm:px-10 sm:pt-10  py-3 min-h-screen pb-3 dark:bg-[#161820]  dark:text-sky-100 ">
       <FontAwesomeIcon icon={faArrowLeft} className={"p-3 text-xl"} onClick={() => navigate("/")} />
-      <CardForum title={forum.title} question={forum.question} />
+      <CardForum title={forum.title} question={forum.question} id={forum.id} />
       <div className="p-3">
         <div className="flex justify-between px-3  items-center mb-4">
           <h3 className="mb-3">{forum.answers.length} jawaban</h3>

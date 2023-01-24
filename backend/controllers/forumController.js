@@ -48,7 +48,7 @@ exports.forumUpdate = async (req, res) => {
 exports.forumDelete = async (req, res) => {
   try {
     const forum = await model.forum.findByPk(req.params.id);
-    return res.json(forum.destroy());
+    forum.destroy();
     res.status(200).json({ message: "berhasil hapus" });
   } catch (err) {
     res.status(500).send(err.message);
@@ -77,6 +77,7 @@ exports.getMyForums = async (req, res) => {
       where: {
         userId,
       },
+      order: [["createdAt", "DESC"]],
     });
     return res.json(forums);
   } catch (error) {

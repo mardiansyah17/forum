@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ModalItem({ text, url }) {
   return (
@@ -17,7 +18,7 @@ function ModalItem({ text, url }) {
   );
 }
 
-export default function ModalOptionCardForum({ show, id }) {
+export default function ModalOptionCardForum({ show, id, updateForum }) {
   return (
     <ul
       id="modal-option"
@@ -25,9 +26,13 @@ export default function ModalOptionCardForum({ show, id }) {
     >
       <li
         onClick={() => {
-          axios
-            .delete(`${import.meta.env.VITE_API_URL}forums/${id}`)
-            .then((res) => console.log(res));
+          {
+            axios.delete(`${import.meta.env.VITE_API_URL}forums/${id}`).then((res) => {
+              if (res.status == 200) {
+                updateForum(id);
+              }
+            });
+          }
         }}
         id="item-modal"
         className="
@@ -35,6 +40,14 @@ export default function ModalOptionCardForum({ show, id }) {
   "
       >
         Hapus
+      </li>
+      <li
+        id="item-modal"
+        className="
+  pb-1 mb-2 border-b border-slate-600
+  "
+      >
+        <Link to={`/edit-forum/${id}`}>Edit</Link>
       </li>
     </ul>
   );
