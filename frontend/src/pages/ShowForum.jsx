@@ -35,6 +35,14 @@ export default function ShowForum() {
     setAnswers((data) => [...data, answer]);
     console.log(answer);
   }
+
+  function deleteAnswer(id) {
+    const resAnswer = answers.filter((data) => {
+      return data.id != id;
+    });
+    setAnswers(resAnswer);
+  }
+
   return (
     <div className="bg-[#FCFBFD] sm:px-10 sm:pt-10  py-3 min-h-screen pb-3 dark:bg-[#161820]  dark:text-sky-100 ">
       <FontAwesomeIcon icon={faArrowLeft} className={"p-3 text-xl"} onClick={() => navigate("/")} />
@@ -47,14 +55,7 @@ export default function ShowForum() {
         {answers
           .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
           .map((data, idx) => {
-            return (
-              <CardAnswer
-                key={`answers.${idx}`}
-                name={data.user.name}
-                createdAt={data.createdAt}
-                content={data.answer}
-              />
-            );
+            return <CardAnswer key={`answers.${idx}`} data={data} deleteAnswer={deleteAnswer} />;
           })}
       </div>
     </div>

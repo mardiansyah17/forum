@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 
 import moment from "moment";
 import { Link } from "react-router-dom";
-import ModalOptionCardForum from "./ModalOptionCardForum";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 moment.locale("id");
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import ModalOption from "./ModalOption";
 export default function CardForum({ data, updateForum }) {
   const user = jwtDecode(Cookies.get("token"));
   const [showModal, setShowModal] = useState(false);
@@ -24,12 +24,21 @@ export default function CardForum({ data, updateForum }) {
   return (
     <div className="relative">
       {showModal ? (
-        <ModalOptionCardForum
+        <ModalOption
           closeOption={() => setShowModal(false)}
-          updateForum={updateForum}
-          show={showModal}
+          updateData={updateForum}
           id={data.id}
-        />
+          url="forums"
+        >
+          <li
+            id="item-modal"
+            className="
+  pb-1 mb-2 border-b border-slate-600
+  "
+          >
+            <Link to={`/edit-forum/${data.id}`}>Edit</Link>
+          </li>
+        </ModalOption>
       ) : (
         <></>
       )}
