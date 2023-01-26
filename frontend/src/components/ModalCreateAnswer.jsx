@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import React from "react";
 import { useState } from "react";
-import Post from "../utils/Post";
+import Post from "../utils/Crud/Post";
 
 export default function ModalCreateAnswer({ forumId, addAnswer }) {
   const [answer, setAnswer] = useState("");

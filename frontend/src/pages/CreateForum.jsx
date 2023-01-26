@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import { useState } from "react";
 import { inputHandler } from "../utils/inputHanlderForm";
 import axios from "axios";
-import Post from "../utils/Post";
+import Post from "../utils/Crud/Post";
 export default function CreateForum() {
   const [form, setForm] = useState({
     title: "",

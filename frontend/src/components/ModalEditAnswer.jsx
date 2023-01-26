@@ -3,21 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import React from "react";
 import { useState } from "react";
-import Post from "../utils/Post";
-import Update from "../utils/Update";
+import Post from "../utils/Crud/Post";
+import Update from "../utils/Crud/Update";
 
-export default function ModalEditAnswer({ data, addAnswer }) {
+export default function ModalEditAnswer({ data, updateAnswer }) {
   const [answer, setAnswer] = useState(data.answer);
 
   function submitHandler() {
-    Update(`answers`, { answer, forumId: data.forumId }, Cookies.get("token")).then((res) => {
-      addAnswer(res.data);
-    });
+    Update(`answers/${data.id}`, { answer, forumId: data.forumId }, Cookies.get("token")).then(
+      (res) => {
+        updateAnswer(res.data.answer);
+      }
+    );
   }
 
   return (
     <>
-      <input type="checkbox" id="edit-answer" className="modal-toggle" />
+      <input type="checkbox" id={`edit-answer${data.id}`} className="modal-toggle" />
       <div className="modal ">
         <div className="modal-box  dark:bg-[#161820]">
           <h3 className="font-bold text-lg">Tulis jawabanmu</h3>
@@ -30,12 +32,12 @@ export default function ModalEditAnswer({ data, addAnswer }) {
             placeholder="isi jawaban"
           ></textarea>
           <div className="modal-action">
-            <label htmlFor="edit-answer" className="px-3 py-2 bg-red-500 rounded-lg">
+            <label htmlFor={`edit-answer${data.id}`} className="px-3 py-2 bg-red-500 rounded-lg">
               Batal
             </label>
             <label
               onClick={submitHandler}
-              htmlFor="edit-answer"
+              htmlFor={`edit-answer${data.id}`}
               className="px-3 py-2 bg-indigo-600 rounded-lg"
             >
               Kirim

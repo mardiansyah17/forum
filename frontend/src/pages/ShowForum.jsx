@@ -5,7 +5,7 @@ import CardAnswer from "../components/CardAnswer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import Get from "../utils/Get";
+import Get from "../utils/Crud/Get";
 import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faComment, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +20,7 @@ export default function ShowForum() {
   useEffect(() => {
     Get(`forums/${id}`, token).then((res) => {
       setForum(res.data);
+
       setAnswers(res.data.answers);
     });
   }, []);

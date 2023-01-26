@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Header from "../components/Header";
 import CardForum from "../components/CardForum";
 import getForums from "../utils/getForums";
+import ModalOptionV2 from "../components/ModalOptionV2";
 
 export default function Home() {
   const [forums, setForums] = useState([]);
@@ -34,9 +35,11 @@ export default function Home() {
         <Header searchHanler={searchHanler} />
         <div className="mt-5 overflow-y-auto  h-[72vh] sm:h-[82vh] lg:h-[72vh] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-blue-300 px-2">
           {forums.length != 0
-            ? forums.map((data, idx) => {
-                return <CardForum updateForum={updateForum} key={`forumId.${idx}`} data={data} />;
-              })
+            ? forums
+                .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+                .map((data, idx) => {
+                  return <CardForum updateForum={updateForum} key={`forumId.${idx}`} data={data} />;
+                })
             : ""}
         </div>
       </div>

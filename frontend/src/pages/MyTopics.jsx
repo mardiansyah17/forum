@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Search from "../components/Search";
 import CardForum from "../components/CardForum";
-import Get from "../utils/Get";
+import Get from "../utils/Crud/Get";
 import Cookies from "js-cookie";
 import getForums from "../utils/getForums";
+import { useNavigate } from "react-router-dom";
 
 export default function MyTopics() {
   const [forums, setForums] = useState([]);
   const token = Cookies.get("token");
-  useEffect(() => {
-    Get("forums/my-forums", token).then((res) => setForums(res.data));
-  }, []);
+  const navigate = useNavigate();
 
   function updateForum(id) {
     const resForum = forums.filter((data) => {
@@ -19,6 +18,12 @@ export default function MyTopics() {
     });
     setForums(resForum);
   }
+  useEffect(() => {
+    if (!token) {
+      return navigate("/login", { relative: "path", replace: true });
+    }
+    Get("forums/my-forums", token).then((res) => setForums(res.data));
+  }, []);
   function searchHanler(event) {
     try {
       let val = event.target.value;

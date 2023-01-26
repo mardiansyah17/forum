@@ -5,21 +5,13 @@ const bycript = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 exports.register = async (req, res, next) => {
   try {
+    const { email, name, password } = req.body;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { email, name, password, confirmPassword } = req.body;
 
-    const user = await model.User.findOne({
-      where: { [Op.or]: [{ email }] },
-    });
-    if (user) {
-      if (email === user.email)
-        return res.status(400).json({ message: "Email sudah terdaftar", status: 400 });
-    }
-    if (password !== confirmPassword)
-      return res.status(400).json({ message: "Password tidak sama", status: 400 });
     res.json({
       status: 200,
       user: await model.User.create({

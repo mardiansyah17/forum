@@ -7,8 +7,8 @@ import Button from "../components/Button";
 import { useState } from "react";
 import { inputHandler } from "../utils/inputHanlderForm";
 import axios from "axios";
-import Get from "../utils/Get";
-import Update from "../utils/Update";
+import Get from "../utils/Crud/Get";
+import Update from "../utils/Crud/Update";
 export default function EditForum() {
   const [form, setForm] = useState({
     title: "",

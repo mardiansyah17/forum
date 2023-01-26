@@ -10,7 +10,6 @@ export default function TopNav() {
   function toggleDarkMode() {
     let valueToggle = document.getElementById("dark-mode-button");
     // console.log(valueToggle.checked);
-    console.log("first");
   }
   return (
     <div className="flex justify-between py-2 pt-4 items-center px-5 mb-4 bg-white shadow-sm dark:border-b dark:border-b-slate-700 dark:bg-[#161820]">
