@@ -33,7 +33,7 @@ export default function CardForum({data}: CardForumProps) {
                         </small>
                         {/*deskripsi singkat forum*/}
                         <p className="text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci
+                            {data.question ?? ""}
                         </p>
                     </div>
                     <div className="flex justify-between text-sm">
