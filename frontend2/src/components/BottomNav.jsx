@@ -1,49 +1,40 @@
+'use client'
+
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
 import BottomNavItemLink from "./BottomNavItemLink";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  fa3,
-  faBullhorn,
-  faHashtag,
-  faHome,
-  faPlus,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import {usePathname} from "next/navigation";
+import {FaBullhorn, FaHome, FaPlus, FaUser} from "react-icons/fa";
+
 
 export default function BottomNav() {
-  const location = useLocation();
+  const pathname = usePathname();
+
   return (
     <div className="flex bg-white dark:bg-[#161820] border-gray-300 justify-around border-t dark:border-slate-800 pt-2">
       <BottomNavItemLink
         title={"Home"}
-        icon={faHome}
+        icon={<FaHome/>}
         path={"/"}
-        active={location.pathname === "/" ? true : false}
+        active={pathname === "/"}
       />
-      {/* <BottomNavItemLink
-        title={"Tags"}
-        icon={faHashtag}
-        path={"/tags"}
-        active={location.pathname === "/tags" ? true : false}
-      /> */}
+
       <BottomNavItemLink
         title={"Buat forum"}
-        icon={faPlus}
+        icon={<FaPlus/>}
         path={"/create-forum"}
-        active={location.pathname === "/create-forum" ? true : false}
+        active={pathname === "/create-forum" }
       />
       <BottomNavItemLink
         title={"My topic"}
-        icon={faBullhorn}
+        icon={<FaBullhorn/>}
         path={"/my-topics"}
-        active={location.pathname === "/my-topics" ? true : false}
+        active={pathname === "/my-topics" }
       />
       <BottomNavItemLink
         title={"Profile"}
-        icon={faUser}
+        icon={<FaUser/>}
         path={"/profil"}
-        active={location.pathname === "/profil" ? true : false}
+        active={pathname === "/profil" }
       />
     </div>
   );

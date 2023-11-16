@@ -1,14 +1,15 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React from "react";
+import {FaHome} from "react-icons/fa";
+import {FaMagnifyingGlass} from "react-icons/fa6";
 
 export default function Search({ placeholder, onChange }) {
   return (
-    <div className="flex sm:w-2/4 ">
-      <FontAwesomeIcon
-        icon={faMagnifyingGlass}
-        className="rounded-l-lg border-2 border-r-0 border-indigo-500 pl-3 text-pu py-3"
-      />
+    <div className="flex sm:w-2/4 items-center ">
+<span className={`border-l-indigo-500 border-l-2  p-3 border-y-2 border-y-indigo-500 rounded-l-lg`}>
+      <FaMagnifyingGlass className=""/>
+
+</span>
       <input
         type="text"
         onChange={onChange}

@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function BottomNavItemLink({ title, icon, path, active }) {
   return (
@@ -8,9 +8,9 @@ export default function BottomNavItemLink({ title, icon, path, active }) {
       className={`${
         active ? "text-indigo-600" : "dark:text-white"
       } flex flex-col items-center py-4 text-2xl`}
-      to={path}
+      href={path}
     >
-      <FontAwesomeIcon icon={icon} />
+      {icon}
       {/* <span>{title}</span> */}
     </Link>
   );

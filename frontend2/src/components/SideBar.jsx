@@ -1,19 +1,12 @@
-import {
-  faBullhorn,
-  faHashtag,
-  faHome,
-  faPlus,
-  faQuestion,
-  faTag,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+'use client'
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import {usePathname} from "next/navigation";
+
 import SideBarItem from "./SideBarItem";
+import {FaBullhorn, FaHome, FaPlus, FaTags, FaUser} from "react-icons/fa";
 
 export default function SideBar() {
-  const location = useLocation();
+  const pathname = usePathname();
   return (
     <div className="basis-[30%] hidden lg:block">
       <div className=" bg-white dark:bg-[#23252E]  shadow-md  rounded-md p-2">
@@ -22,32 +15,32 @@ export default function SideBar() {
           <SideBarItem
             path={"/"}
             title="Home"
-            icon={faHome}
-            active={location.pathname === "/" ? true : false}
+            icon={<FaHome/>}
+            active={pathname === "/" }
           />
           <SideBarItem
             path={"/tags"}
             title="Tags"
-            icon={faHashtag}
-            active={location.pathname === "/tags" ? true : false}
+            icon={<FaTags/>}
+            active={pathname === "/tags" }
           />
           <SideBarItem
             path={"/create-forum"}
             title="Buat forum"
-            icon={faPlus}
-            active={location.pathname === "/create-forum" ? true : false}
+            icon={<FaPlus/>}
+            active={pathname === "/create-forum" }
           />
           <SideBarItem
             path={"/my-topics"}
             title="My topics"
-            icon={faBullhorn}
-            active={location.pathname === "/my-topics" ? true : false}
+            icon={<FaBullhorn/>}
+            active={pathname === "/my-topics" }
           />
           <SideBarItem
             path={"/profil"}
             title="Profil"
-            icon={faUser}
-            active={location.pathname === "/profil" ? true : false}
+            icon={<FaUser/>}
+            active={pathname === "/profil" }
           />
         </ul>
       </div>

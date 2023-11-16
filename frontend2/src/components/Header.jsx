@@ -1,7 +1,8 @@
-import { faFilter, faMagnifyingGlass, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+'use client'
+
 import React, { useEffect, useState } from "react";
 import Search from "./Search";
+import {FaFilter} from "react-icons/fa6";
 
 function Item({ active, title }) {
   return (
@@ -17,16 +18,19 @@ function Item({ active, title }) {
   );
 }
 
-export default function Header({ searchHanler }) {
+export default function Header() {
   return (
     <div className="">
       <div className=" mx-2  flex items-center justify-center ">
-        <Search placeholder={"Cari forum"} onChange={searchHanler} />
+        <Search placeholder={"Cari forum"}  />
         {/* <h1>halo</h1> */}
-        <FontAwesomeIcon
-          icon={faFilter}
-          className="bg-indigo-600 ml-3  p-3 text-white rounded-lg"
-        />
+        <div
+            className="bg-indigo-600 ml-3 text-white rounded-lg p-3"
+
+        >
+            <FaFilter
+            />
+        </div>
       </div>
       <div className="flex mt-4 ml-2 justify-center">
         <Item active={true} title="Semua" />
