@@ -1,9 +1,10 @@
 'use client'
-import React from "react";
+import React, {useEffect} from "react";
 
 import moment from "moment";
 import Link from "next/link";
 import {FaComment} from "react-icons/fa";
+import 'moment/locale/id';
 
 moment.locale("id");
 
@@ -12,7 +13,9 @@ interface CardForumProps {
 }
 
 export default function CardForum({data}: CardForumProps) {
-
+    useEffect(() => {
+        console.log(data)
+    }, [data])
 
     return (
         <div className="relative">
@@ -29,7 +32,7 @@ export default function CardForum({data}: CardForumProps) {
 
                         </div>
                         <small className="mr-4  mb-3 font-extralight">
-                            Dibuat oleh <span className="text-indigo-400 font-medium ">Mardi</span>
+                            Dibuat oleh <span className="text-indigo-400 font-medium ">{data.user.name}</span>
                         </small>
                         {/*deskripsi singkat forum*/}
                         <p className="text-sm">
@@ -37,8 +40,8 @@ export default function CardForum({data}: CardForumProps) {
                         </p>
                     </div>
                     <div className="flex justify-between text-sm">
-                        {/* <span>{updatedAt}</span> */}
-                        <span>10 mei 2023</span>
+                        {/* tanggal di buat dengan format jam tanggal bulan tahun  */}
+                        {moment(data.created_at).format('LT, LL')}
 
                         <div className="flex items-center text-indigo-500">
                             <FaComment/>
