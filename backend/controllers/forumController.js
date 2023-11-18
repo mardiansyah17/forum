@@ -1,6 +1,12 @@
 const {validationResult} = require("express-validator");
 const model = require("../models/index");
 const jwt = require("jsonwebtoken");
+const {Op} = require("sequelize");
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+
 exports.forumCreate = async (req, res) => {
     try {
         const token = req.header("token");
@@ -24,17 +30,34 @@ exports.forumCreate = async (req, res) => {
 
 exports.forumGet = async (req, res) => {
     try {
+        const title = req.query.title ?? "";
+        console.log(title);
+
+        let whereCondition = {};
+
+        // Check if title is not empty before adding it to the where clause
+        if (title.length > 3) {
+            whereCondition = {
+                title: {
+                    [Op.like]: `%${title}%`
+                }
+            };
+        }
+
         const forums = await model.forum.findAll({
+            where: whereCondition,
             include: [
                 {model: model.User, as: "user"},
             ],
             order: [["createdAt", "DESC"]],
         });
+
         res.json(forums);
     } catch (err) {
         res.status(500).send(err.message);
     }
 };
+
 
 exports.forumUpdate = async (req, res) => {
     try {

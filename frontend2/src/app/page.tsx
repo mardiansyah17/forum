@@ -11,7 +11,7 @@ async function getForums(): Promise<ForumInterface[]> {
 }
 
 export default async function Home() {
-    const forums = await getForums()
+    // const forums = await getForums()
 
     return (
         <div className="">
