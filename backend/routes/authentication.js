@@ -1,12 +1,12 @@
 var express = require("express");
-const { register, loginController } = require("../controllers/authController");
-var router = express.Router();
+const {register, loginController} = require("../controllers/authController");
+const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { registerValidate } = require("../validation/validation");
+const {registerValidate, loginValidate} = require("../validation/validation");
 
 router.post("/register", registerValidate, register);
-router.post("/login", loginController);
+router.post("/login", loginValidate, loginController);
 router.get("/tes", async (req, res) => {
-  res.json("user");
+    res.json("user");
 });
 module.exports = router;

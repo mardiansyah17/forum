@@ -2,6 +2,7 @@ interface ForumInterface {
     id: number;
     title: string;
     question: string;
-    created_at: Date;
+    createdAt: String;
     user: UserInterface;
+    slug: string;
 }

@@ -1,44 +1,63 @@
 "use strict";
-const { Model } = require("sequelize");
+const {Model, Op} = require("sequelize");
 const moment = require("moment");
-const user = require("./user");
+const slugify = require("slugify");
 moment.tz.setDefault("Asia/Jakarta");
 moment.locale("id");
-const model = require("../models/index");
-module.exports = (sequelize, DataTypes) => {
-  class forum extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  forum.init(
-    {
-      title: DataTypes.STRING,
-      question: DataTypes.TEXT,
-      userId: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "forum",
-      tableName: "forums",
-    }
-  );
 
-  forum.addHook("beforeCreate", async (f, op) => {
-    f.dataValues.createdAt = moment().toISOString();
-    f.dataValues.updatedAt = moment().toISOString();
-  });
-  forum.addHook("beforeUpdate", async (f, op) => {
-    f.dataValues.updatedAt = moment().toISOString();
-  });
-  forum.associate = (model) => {
-    forum.belongsTo(model.User, { as: "user" });
-    forum.hasMany(model.Answer, { as: "answers", onDelete: "CASCADE", foreignKey: "forumId" });
-  };
-  return forum;
+module.exports = (sequelize, DataTypes) => {
+    class Forum extends Model {
+        static associate(models) {
+            Forum.belongsTo(models.User, {as: "user"});
+            Forum.hasMany(models.Answer, {as: "answers", onDelete: "CASCADE", foreignKey: "forumId"});
+        }
+    }
+
+    Forum.init(
+        {
+            title: DataTypes.STRING,
+            question: DataTypes.TEXT,
+            userId: DataTypes.INTEGER,
+            slug: DataTypes.STRING,
+        },
+        {
+            sequelize,
+            modelName: "Forum",
+            tableName: "forums",
+        }
+    );
+
+    Forum.addHook("beforeCreate", async (forum, options) => {
+        forum.createdAt = moment().toISOString();
+        forum.updatedAt = moment().toISOString();
+
+        let baseSlug = slugify(forum.title, {lower: true});
+        let slug = baseSlug;
+
+        let counter = 1;
+        while (true) {
+            const existingForum = await Forum.findOne({
+                where: {
+                    slug: {
+                        [Op.like]: `${slug}%`,
+                    },
+                },
+            });
+
+            if (!existingForum) {
+                break;
+            }
+
+            counter++;
+            slug = `${baseSlug}-${counter}`;
+        }
+
+        forum.slug = slug;
+    });
+
+    Forum.addHook("beforeUpdate", (forum, options) => {
+        forum.updatedAt = moment().toISOString();
+    });
+
+    return Forum;
 };

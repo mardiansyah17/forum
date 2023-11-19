@@ -1,32 +1,23 @@
 import Header from "@/components/Header";
-import CardForum from "@/components/CardForum";
 import instance from "@/libs/instance";
+import {ListForum} from "@/components/ListForum";
 
 async function getForums(): Promise<ForumInterface[]> {
     return await instance.get('/forums').then(res => {
         return res.data
     }).catch(err => {
-        console.log(err.response.data)
+        console.log(err.response)
     })
 }
 
 export default async function Home() {
-    // const forums = await getForums()
+    const forums = await getForums()
 
     return (
         <div className="">
             <Header/>
-            <div
-                className="mt-5 overflow-y-auto  h-[72vh] sm:h-[82vh] lg:h-[72vh] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-blue-300 px-2">
-                {
-                    forums.map((forum, i) => (
-                        <CardForum
-                            key={`forum-${i}`}
-                            data={forum}/>
-                    ))
-
-                }
-            </div>
+            {/*<Suspense fallback={'lagi loading'}/>*/}
+            <ListForum dataForums={forums}/>
         </div>
     )
 }

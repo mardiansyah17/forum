@@ -17,12 +17,13 @@ exports.forumCreate = async (req, res) => {
             return res.status(400).json({errors: errors.array()});
         }
         const {title, question} = req.body;
-        const forum = await model.forum.create({
+        await model.Forum.create({
             title,
             question,
             userId: user.id,
+
         });
-        return res.json(forum);
+        return res.json({"message": "Forum berhasil dibuat"});
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -44,7 +45,7 @@ exports.forumGet = async (req, res) => {
             };
         }
 
-        const forums = await model.forum.findAll({
+        const forums = await model.Forum.findAll({
             where: whereCondition,
             include: [
                 {model: model.User, as: "user"},

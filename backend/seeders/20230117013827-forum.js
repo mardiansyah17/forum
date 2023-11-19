@@ -10,6 +10,7 @@ module.exports = {
                     title: "ini judul",
                     question: "ini pertanyaan",
                     userId: 1,
+                    slug: "ini-judul-1",
                     createdAt: new Date(),
                     updatedAt: new Date()
                 },
@@ -17,6 +18,7 @@ module.exports = {
                     title: "ini judul",
                     question: "ini pertanyaan",
                     userId: 1,
+                    slug: "ini-judul-2",
                     createdAt: new Date(),
                     updatedAt: new Date()
                 },

@@ -43,6 +43,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/slug@^5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@types/slug/-/slug-5.0.7.tgz#dc0e5d3ea6ab6daf29bafaa2bcf689cfefaab28a"
+  integrity sha512-u5T21+PqfRpHszRWSv5gJYDIkm6lmYUXLjZVYvQyWNO9aC0zs+a11qqtbxbsNRiNLTmw0Xi+5NWK/Qz+JjaB9w==
+
 "@types/validator@^13.7.17":
   version "13.11.6"
   resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.11.6.tgz#8645efedfd891bc1d7ad82539005d7ff785fe294"
@@ -1300,6 +1305,16 @@ signal-exit@^4.0.1:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-4.1.0.tgz#952188c1cbd546070e2dd20d0f41c0ae0530cb04"
   integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
+
+slug@^8.2.3:
+  version "8.2.3"
+  resolved "https://registry.yarnpkg.com/slug/-/slug-8.2.3.tgz#9aa33e532ae9ccddaf55a42abd9bf6a89d5e44d2"
+  integrity sha512-fXjhAZszNecz855GUNIwW0+sFPi9WV4bMiEKDOCA4wcq1ts1UnUVNy/F78B0Aat7/W3rA+se//33ILKNMrbeYQ==
+
+slugify@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.6.6.tgz#2d4ac0eacb47add6af9e04d3be79319cbcc7924b"
+  integrity sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==
 
 source-map@0.4.x:
   version "0.4.4"

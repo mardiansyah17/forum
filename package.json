@@ -1,8 +1,6 @@
 {
-  "dependencies": {
-    "axios": "^1.6.2",
-    "cookies-next": "^4.0.0",
-    "jwt-decode": "^4.0.0",
-    "moment": "^2.29.4"
+  "scripts": {
+    "fe": "cd frontend2 && yarn dev",
+    "be": "cd backend && yarn start"
   }
 }
