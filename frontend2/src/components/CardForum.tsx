@@ -5,6 +5,7 @@ import moment from "moment";
 import Link from "next/link";
 import {FaComment} from "react-icons/fa";
 import 'moment/locale/id';
+import truncate from "@/libs/truncate";
 
 moment.locale("id");
 
@@ -34,7 +35,8 @@ export default function CardForum({data}: CardForumProps) {
                         </small>
                         {/*deskripsi singkat forum*/}
                         <p className="text-sm">
-                            {data.question ?? ""}
+                            {truncate(data?.question)}
+
                         </p>
                     </div>
                     <div className="flex justify-between text-sm">

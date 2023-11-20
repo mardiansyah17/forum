@@ -1,16 +1,16 @@
 var express = require("express");
 var router = express.Router();
-const { body, validationResult } = require("express-validator");
+const {body, validationResult} = require("express-validator");
 
 const {
-  forumCreate,
-  forumGet,
-  forumUpdate,
-  forumDelete,
-  getOneForum,
-  getMyForums,
+    forumCreate,
+    forumGet,
+    forumUpdate,
+    forumDelete,
+    getOneForum,
+    getMyForums,
 } = require("../controllers/forumController");
-const { forumValidate } = require("../validation/validation");
+const {forumValidate} = require("../validation/validation");
 const auth = require("../middleware/auth");
 
 router.get("/my-forums", auth, getMyForums);
@@ -21,7 +21,7 @@ router.post("/", auth, forumValidate, forumCreate);
 router.get("/", forumGet);
 
 // get one forum
-router.get("/:id", getOneForum);
+router.get("/:slug", getOneForum);
 
 router.put("/:id", auth, forumValidate, forumUpdate);
 // delete forum

@@ -76,7 +76,7 @@ exports.forumUpdate = async (req, res) => {
 };
 exports.forumDelete = async (req, res) => {
     try {
-        const forum = await model.forum.findByPk(req.params.id);
+        const forum = await model.Forum.findByPk(req.params.id);
         forum.destroy();
         res.status(200).json({message: "berhasil hapus"});
     } catch (err) {
@@ -86,7 +86,10 @@ exports.forumDelete = async (req, res) => {
 
 exports.getOneForum = async (req, res) => {
     try {
-        const forum = await model.forum.findByPk(req.params.id, {
+        const forum = await model.Forum.findOne({
+            where: {
+                slug: req.params.slug
+            },
             include: [
                 {model: model.User, as: "user"},
                 {model: model.Answer, as: "answers", include: [{model: model.User, as: "user"}]},
