@@ -3,13 +3,14 @@ const model = require("../models/index");
 const {Op} = require("sequelize");
 const bycript = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {handleValidationErrors} = require("../lib/handleValidationErrors");
 exports.register = async (req, res, next) => {
     try {
         const {email, name, password} = req.body;
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()});
+            return res.status(400).json({errors: handleValidationErrors(errors.array())});
         }
 
         res.json({
@@ -29,13 +30,17 @@ exports.loginController = async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()});
+            return res.status(400).json({errors: handleValidationErrors(errors.array())});
         }
         const {email, password} = req.body;
-        const user = await model.User.findOne({where: {email}});
+        const user = await model.User.findOne({where: {email}, attributes: ["id", "email", "name", "password"]});
 
-        if (!user) return res.status(400).json({message: "Email atau password salah"});
-
+        if (!user) return res.status(401).json({message: "Email atau password salah"});
+        console.log(user.password)
+        const match = await bycript.compare(password, user.password);
+        if (!match) {
+            return res.status(400).json({message: "Email atau password salah"});
+        }
         const token = jwt.sign(
             {
                 id: user.id,
@@ -48,7 +53,7 @@ exports.loginController = async (req, res) => {
         res.json({
             status: 200,
             token,
-        
+
         });
     } catch (error) {
         res.json(error.message);
